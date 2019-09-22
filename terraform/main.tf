@@ -1,13 +1,11 @@
-
-
 provider "google" {
   project = "bot-host-253711"
-  region = "europe-west2"
-  zone = "europe-west2-a"
+  region  = "europe-west2"
+  zone    = "europe-west2-a"
 }
 
 data "google_compute_image" "search" {
-  family = "cos-stable"
+  family  = "cos-stable"
   project = "gce-uefi-images"
 
 }
@@ -21,14 +19,11 @@ resource "google_compute_instance" "vm_instance" {
       image = data.google_compute_image.search.self_link
     }
   }
-  metadata_startup_script = file("./provisioning.sh")
+  metadata_startup_script = "docker run barrett370/ricardo-bot:${var.docker-tag}"
   network_interface {
     # A default network is created for all GCP projects
-    network       = "default"
+    network = "default"
     access_config {
     }
-  }
-  metadata {
-    
   }
 }
