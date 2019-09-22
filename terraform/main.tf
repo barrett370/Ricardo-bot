@@ -11,7 +11,7 @@ data "google_compute_image" "search" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-instance"
+  name         = "ricardo-instance"
   machine_type = "f1-micro"
 
   boot_disk {

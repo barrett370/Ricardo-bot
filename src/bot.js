@@ -7,17 +7,27 @@ client.on('ready', () => {
 })
 ;
 client.on('message', msg => {
-    switch (msg.content) {
-        case 'ping':
-            msg.reply("pong");
-            break;
-        case 'bloomberg':
-            msg.reply("bloooooombeeerrg");
-            break;
+        if (msg.content.substring(0, 1) === '!') {
+            var args = msg.content.substring(1).split(' ');
+            var cmd = args[0];
+
+            switch (cmd) {
+                case 'ping':
+                    msg.reply("pong");
+                    break;
+                case 'bloomberg':
+                    msg.reply("bloooooombeeerrg");
+                    break;
+                case 'bigbrain':
+                    msg.reply({
+                        files:
+                            ["./resources/bigbrain.gif"]
+                    });
+                    break;
+            }
+        }
     }
-});
-
-
+);
 
 
 client.login(auth.token);

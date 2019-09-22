@@ -1,5 +1,5 @@
 
 
 variable "docker-tag" {
-  default = "979a82c-1569172149"
+  default = "0d4c723-1569176264"
 }
