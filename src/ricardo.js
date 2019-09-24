@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const auth = require('./auth.json');
-
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
@@ -25,6 +24,31 @@ client.on('message', msg => {
                             ["./resources/bigbrain.gif"]
                     });
                     break;
+                case 'dad':
+                    const https = require('https');
+                    const options = {
+                        hostname: 'icanhazdadjoke.com',
+                        port: "443",
+                        path: '/',
+                        accept: "   application/json"
+                    }
+
+                    const req = https.request(options, res => {
+                    console.log(`statusCode: ${res.statusCode}`)
+
+                    res.on('data', d => {
+                        process.stdout.write(d)
+                    })
+                })
+
+                    req.on('error', error => {
+                        console.error(error)
+                        msg.reply("piss off");
+                    })
+
+                    req.end()
+
+
             }
         }
         if (((msg.content.toLowerCase().includes("i'm")) || (msg.content.toLowerCase().includes("i am"))) && msg.author.tag !== client.user.tag) {
@@ -42,8 +66,12 @@ client.on('message', msg => {
 
             if (iam.includes(".")) {
                 iam = iam.split(".")[0]
-            }else if (iam.includes(",")) {
+            } else if (iam.includes(",")) {
                 iam = iam.split(",")[0]
+            }
+            let dets = ['the', 'a', 'an'];
+            for (let i = 0; i < dets.length; i++) {
+                iam = iam.replace(dets[i], '')
             }
             let reply = "Hi" + iam + ", I'm Dad!"
             msg.reply(reply)
