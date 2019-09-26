@@ -42,7 +42,9 @@ tf-plan:
     - cd ./terraform
     - echo $googleCloudCreds | base64 -d > cloudKeys.json
     - export GOOGLE_APPLICATION_CREDENTIALS="cloudKeys.json"
-    - docker run --rm --workdir /dir -v $PWD:/dir hashicorp/terraform:latest init && plan
+    - docker run --rm --workdir /dir -v $PWD:/dir hashicorp/terraform:latest init && terraform plan
+    - docker run --rm --workdir /dir -v $PWD:/dir hashicorp/terraform:latest plan
+
 #    - terraform init
 #    - terraform plan
 
