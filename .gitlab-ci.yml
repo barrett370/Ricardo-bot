@@ -1,3 +1,6 @@
+image: docker:latest
+services:
+  - docker:dind
 # This file is a template, and might need editing before it works on your project.
 stages:
   - build
@@ -32,15 +35,14 @@ build:
     - master
 
 tf-plan:
-  image: hashicorp/terraform:latest
   stage: plan
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - echo $googleCloudCreds | base64 -d > /tmp/cloudKeys.json
-    - export GOOGLE_APPLICATION_CREDENTIALS="/tmp/cloudKeys.json"
     - cd ./terraform
-    - ls
+    - echo $googleCloudCreds | base64 -d > cloudKeys.json
+    - export GOOGLE_APPLICATION_CREDENTIALS="cloudKeys.json"
+    - docker run --rm --workdir /dir -v $PWD:/dir hashicorp/terraform:latest plan
     - terraform plan
 
 tf-apply-master:
