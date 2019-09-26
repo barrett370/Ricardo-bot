@@ -19,7 +19,7 @@ resource "google_compute_instance" "vm_instance" {
       image = data.google_compute_image.search.self_link
     }
   }
-  metadata_startup_script = "docker run barrett370/ricardo-bot:latest"
+  metadata_startup_script = "docker run registry.gitlab.com/chasbob/ricardo-bot:latest"
   network_interface {
     # A default network is created for all GCP projects
     network = "default"

@@ -34,19 +34,24 @@ build:
 tf-plan:
   image: hashicorp/terraform:latest
   stage: plan
-  script: |
-    echo $googleCloudCreds | base64 -d > /tmp/cloudKeys.json
-    export GOOGLE_APPLICATION_CREDENTIALS="/tmp/cloudKeys.json"
-    cd ./terraform
-    terraform plan
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - echo $googleCloudCreds | base64 -d > /tmp/cloudKeys.json
+    - export GOOGLE_APPLICATION_CREDENTIALS="/tmp/cloudKeys.json"
+    - cd ./terraform
+    - ls
+    - terraform plan
 
 tf-apply-master:
   image: hashicorp/terraform:latest
   stage: apply
-  script: |
-    echo $googleCloudCreds | base64 -d > /tmp/cloudKeys.json
-    export GOOGLE_APPLICATION_CREDENTIALS="/tmp/cloudKeys.json"
-    cd ./terraform
-    terraform apply --auto-approve
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  script:
+    - echo $googleCloudCreds | base64 -d > /tmp/cloudKeys.json
+    - export GOOGLE_APPLICATION_CREDENTIALS="/tmp/cloudKeys.json"
+    - cd ./terraform
+    - terraform apply --auto-approve
   only:
     - master
