@@ -17,8 +17,10 @@ before_script:
 
 stages:
   - build
+  - validate
   - plan
   - apply
+
 build-master:
   # Official docker image.
   image: docker:latest
@@ -57,7 +59,7 @@ tf-plan:
   script:
     - terraform plan -out "planfile"
   dependencies:
-    - validate
+    - tf-build
   artifacts:
     paths:
       - planfile
@@ -68,5 +70,5 @@ tf-apply:
   script:
     - terraform apply -input=false "planfile"
   dependencies:
-    - plan
+    - tf-plan
   when: manual
