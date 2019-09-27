@@ -55,6 +55,7 @@ tf-build:
 tf-plan:
   stage: plan
   script:
+    - cat $(echo $GOOGLE_APPLICATION_CREDENTIALS)
     - terraform plan -out "planfile"
   dependencies:
     - tf-build
