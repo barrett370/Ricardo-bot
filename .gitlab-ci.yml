@@ -16,7 +16,7 @@ stages:
   - validate
   - plan
   - apply
-  - -build
+  - build
 
 build-master:
   # Official docker image.
