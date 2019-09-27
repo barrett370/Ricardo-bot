@@ -1,6 +1,6 @@
 
 image:
-  name: hashicorp/terraform:latest
+  name: hashicorp/terraform:light
   entrypoint:
     - '/usr/bin/env'
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
@@ -10,6 +10,7 @@ before_script:
   - ls ./creds
   - echo $googleCloudCreds | base64 -d > ./creds/cloudKeys.json
   - export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/creds/cloudKeys.json"
+  - ls && ls ./creds
   - cd ./terraform
   - terraform init
 
@@ -55,7 +56,6 @@ tf-build:
 tf-plan:
   stage: plan
   script:
-    - cat $(echo $GOOGLE_APPLICATION_CREDENTIALS)
     - terraform plan -out "planfile"
   dependencies:
     - tf-build
