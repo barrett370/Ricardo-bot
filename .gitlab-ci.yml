@@ -8,12 +8,8 @@ image:
 before_script:
   - mkdir -p ./creds
   - touch ./creds/cloudKeys.json
-  - echo $googleCloudCreds
-  - echo $googleCloudCreds | base64 -d
-  - echo $googleCloudCreds | base64 -d > ./creds/cloudKeys.json
   - ls ./creds
-  - cat ./creds/cloudKeys.json
-  - export GOOGLE_APPLICATION_CREDENTIALS="./creds/cloudKeys.json"
+  - export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/creds/cloudKeys.json"
   - cd ./terraform
   - terraform init
 
