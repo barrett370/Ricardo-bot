@@ -6,13 +6,14 @@ image:
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 
 before_script:
-  - echo $googleCloudCreds | base64 -d > cloudKeys.json
-  - export GOOGLE_APPLICATION_CREDENTIALS="cloudKeys.json"
+  - mkdir -p ./creds
+  - echo $googleCloudCreds | base64 -d > ./creds/cloudKeys.json
+  - export GOOGLE_APPLICATION_CREDENTIALS="./creds/cloudKeys.json"
   - cd ./terraform
   - terraform init
 
 stages:
-  - build
+#  - build
   - validate
   - plan
   - apply
