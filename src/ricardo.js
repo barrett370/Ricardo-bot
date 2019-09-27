@@ -76,6 +76,12 @@ client.on('message', msg => {
             let reply = "Hi" + iam + ", I'm Dad!"
             msg.reply(reply)
         }
+        if(msg.content.toLowerCase().includes("ricardo")){
+            msg.reply({
+                files:
+                    ["./resources/ricardo.gif"]
+            });
+        }
     }
 );
 
