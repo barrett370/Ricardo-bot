@@ -4,12 +4,8 @@ image:
   entrypoint:
     - '/usr/bin/env'
     - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
-services:
-  - docker:dind
-# This file is a template, and might need editing before it works on your project.
 
 before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   - echo $googleCloudCreds | base64 -d > cloudKeys.json
   - export GOOGLE_APPLICATION_CREDENTIALS="cloudKeys.json"
   - cd ./terraform
