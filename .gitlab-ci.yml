@@ -13,10 +13,10 @@ before_script:
   - terraform init
 
 stages:
-#  - build
   - validate
   - plan
   - apply
+  - -build
 
 build-master:
   # Official docker image.
