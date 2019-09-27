@@ -9,7 +9,6 @@ before_script:
   - mkdir -p ./creds
   - ls ./creds
   - echo $googleCloudCreds | base64 -d > ./creds/cloudKeys.json
-  - export GOOGLE_APPLICATION_CREDENTIALS="$(pwd)/creds/cloudKeys.json"
   - ls
   - ls ./creds
   - cat ./creds/cloudKeys.json

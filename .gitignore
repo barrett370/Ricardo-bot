@@ -6,3 +6,5 @@ src/node_modules/
 terraform/.terraform/
 
 creds/cloudKeys.json
+
+creds/
