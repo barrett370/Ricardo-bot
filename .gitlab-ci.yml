@@ -1,7 +1,20 @@
-image: docker:latest
+
+image:
+  name: hashicorp/terraform:latest
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
 services:
   - docker:dind
 # This file is a template, and might need editing before it works on your project.
+
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+  - echo $googleCloudCreds | base64 -d > cloudKeys.json
+  - export GOOGLE_APPLICATION_CREDENTIALS="cloudKeys.json"
+  - cd ./terraform
+  - terraform init
+
 stages:
   - build
   - plan
@@ -34,30 +47,26 @@ build:
   except:
     - master
 
+tf-build:
+  stage: validate
+  script:
+    - terraform validate
+
 tf-plan:
   stage: plan
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - cd ./terraform
-    - echo $googleCloudCreds | base64 -d > cloudKeys.json
-    - export GOOGLE_APPLICATION_CREDENTIALS="cloudKeys.json"
-    - docker run --rm --workdir /dir -v $PWD:/dir hashicorp/terraform:latest init 
-    - docker run --rm --workdir /dir -v $PWD:/dir hashicorp/terraform:latest plan
+    - terraform plan -out "planfile"
+  dependencies:
+    - validate
+  artifacts:
+    paths:
+      - planfile
 
-#    - terraform init
-#    - terraform plan
-
-tf-apply-master:
+tf-apply:
   image: hashicorp/terraform:latest
   stage: apply
-  before_script:
-    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - echo $googleCloudCreds | base64 -d > /tmp/cloudKeys.json
-    - export GOOGLE_APPLICATION_CREDENTIALS="/tmp/cloudKeys.json"
-    - cd ./terraform
-    - terraform init
-    - terraform apply --auto-approve
-  only:
-    - master
+    - terraform apply -input=false "planfile"
+  dependencies:
+    - plan
+  when: manual

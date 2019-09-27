@@ -34,12 +34,12 @@ client.on('message', msg => {
                     }
 
                     const req = https.request(options, res => {
-                    console.log(`statusCode: ${res.statusCode}`)
+                        console.log(`statusCode: ${res.statusCode}`)
 
-                    res.on('data', d => {
-                        process.stdout.write(d)
+                        res.on('data', d => {
+                            process.stdout.write(d)
+                        })
                     })
-                })
 
                     req.on('error', error => {
                         console.error(error)
@@ -71,9 +71,9 @@ client.on('message', msg => {
             }
             let dets = ['the', 'a', 'an'];
             for (let i = 0; i < dets.length; i++) {
-                iam = iam.replace(dets[i], '')
+                iam = iam.replace(new RegExp("\\b" + dets[i] + "\\b"), '')
             }
-            let reply = "Hi" + iam + ", I'm Dad!"
+            let reply = "Hi" + iam + ", I'm Dad!";
             msg.reply(reply)
         }
     }
