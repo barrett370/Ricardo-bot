@@ -65,7 +65,6 @@ tf-plan:
       - planfile
 
 tf-apply:
-  image: hashicorp/terraform:latest
   stage: apply
   script:
     - terraform apply -auto-approve "planfile"
