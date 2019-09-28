@@ -2,5 +2,5 @@ FROM node
 
 COPY ./src .
 
-CMD npm install
-CMD node ricardo.js
+RUN npm install
+ENTRYPOINT [ "node", "ricardo.js" ]
