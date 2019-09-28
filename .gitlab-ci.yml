@@ -16,10 +16,10 @@ before_script:
   - terraform init
 
 stages:
+  - build
   - validate
   - plan
   - apply
-  - build
 
 build-master:
   # Official docker image.
@@ -68,7 +68,7 @@ tf-apply:
   image: hashicorp/terraform:latest
   stage: apply
   script:
-    - terraform apply -input=false "planfile"
+    - terraform apply -auto-approve "planfile"
   dependencies:
     - tf-plan
   when: manual
