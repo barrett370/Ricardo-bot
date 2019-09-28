@@ -56,7 +56,7 @@ tf-build:
 tf-plan:
   stage: plan
   script:
-    - terraform plan -out "planfile"
+    - terraform plan
   dependencies:
     - tf-build
 
