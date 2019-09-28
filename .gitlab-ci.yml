@@ -1,4 +1,3 @@
-
 image:
   name: hashicorp/terraform:light
   entrypoint:
@@ -60,14 +59,11 @@ tf-plan:
     - terraform plan -out "planfile"
   dependencies:
     - tf-build
-  artifacts:
-    paths:
-      - planfile
 
 tf-apply:
   stage: apply
   script:
-    - terraform apply -auto-approve "planfile"
+    - terraform apply -auto-approve
   dependencies:
     - tf-plan
   when: manual
