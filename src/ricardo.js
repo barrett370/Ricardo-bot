@@ -30,13 +30,17 @@ client.on('message', msg => {
                         hostname: 'icanhazdadjoke.com',
                         port: "443",
                         path: '/',
-                        accept: "   application/json"
+                        headers: {
+                            'Accept': 'application/json'
+                        }
                     }
 
                     const req = https.request(options, res => {
                     console.log(`statusCode: ${res.statusCode}`)
 
                     res.on('data', d => {
+                        var jsonContent = JSON.parse(d);
+                        msg.reply(jsonContent.joke)
                         process.stdout.write(d)
                     })
                 })
