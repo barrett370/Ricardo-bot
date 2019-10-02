@@ -1,5 +1,7 @@
 version: 2
 
+references:
+
 terraform_init: &terraform_init
   run:
     name: terraform init
