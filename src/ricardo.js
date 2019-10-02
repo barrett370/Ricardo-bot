@@ -87,7 +87,7 @@ client.on('message', msg => {
             });
         }
     }
-);
+});
 
 
 client.login(auth.token);
