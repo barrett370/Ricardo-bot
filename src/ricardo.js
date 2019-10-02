@@ -91,3 +91,8 @@ client.on('message', msg => {
 
 
 client.login(auth.token);
+
+
+process.on('SIGINT', function() {
+    process.exit();
+});
