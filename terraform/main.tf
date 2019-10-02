@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("../creds/cloudKeys.json")
+  credentials = "${file("../creds/cloudKeys.json")}"
   project = "bot-host-253711"
   region = "europe-west2"
   zone = "europe-west2-a"
