@@ -11,6 +11,10 @@ data "google_compute_image" "search" {
 
 }
 
+resource "google_compute_project_default_network_tier" "default" {
+  network_tier = "STANDARD"
+}
+
 resource "google_compute_instance" "vm_instance" {
   name = "ricardo-instance"
   machine_type = "f1-micro"
@@ -28,7 +32,6 @@ resource "google_compute_instance" "vm_instance" {
   }
   network_interface {
     network = "default"
-    network_tier = "STANDARD"
     access_config {
     }
   }
