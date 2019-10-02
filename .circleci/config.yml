@@ -29,6 +29,7 @@ jobs:
   build:
     docker:
       - image: docker:latest
+      - image: docker:dind
     steps:
       - checkout
       - run:
