@@ -4,45 +4,45 @@ version: 2
 jobs:
   build-master:
     docker:
-      - image: docker:latest
+      image: docker:latest
     steps:
       - checkout
       - run:
-          name: build
+          name:
           command: |
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
             docker build --pull -t "$CI_REGISTRY_IMAGE" .
             docker push "$CI_REGISTRY_IMAGE"
   build:
     docker:
-      - image: docker:latest
+      image: docker:latest
     steps:
       - checkout
-      - run: build-master
+      - run:
         command: |
           docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
           docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
           docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
-  validate:
-    docker:
-      - image: hashicorp/terraform:light
-    steps:
-      - checkout
-      - run:
-          name: Terraform validate
-          command: cd ./terraform && terraform validate
   init:
     docker:
-      - image: hashicorp/terraform:light
+      image: hashicorp/terraform:light
       steps:
         - checkout
         - run:
             name: Terraform init
             command: cd ./terraform && terraform init
+  validate:
+    docker:
+        image: hashicorp/terraform:light
+    steps:
+        - checkout
+        - run:
+          name: Terraform validate
+          command: cd ./terraform && terraform validate
   plan:
     docker:
-      - image: hashicorp/terraform:light
+      image: hashicorp/terraform:light
     steps:
       - checkout
       - run:
@@ -51,7 +51,7 @@ jobs:
 
   apply:
     docker:
-      - image: hashicorp/terraform:light
+      image: hashicorp/terraform:light
     steps:
       - checkout
       - run:
