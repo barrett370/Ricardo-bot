@@ -71,7 +71,7 @@ workflows:
           filters:
             branches:
               only: master
-      - validate:
+      - validate
       - plan:
           requires:
               - validate
