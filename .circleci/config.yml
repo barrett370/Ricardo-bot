@@ -6,7 +6,14 @@ terraform_init: &terraform_init
   run:
     name: terraform init
     command: |
-      cd ./terraform && terraform init
+      mkdir -p ./creds
+      ls ./creds
+      echo $GOOGLE_CLOUD_CREDS | base64 -d > ./creds/cloudKeys.json
+      ls
+      ls ./creds
+      cat ./creds/cloudKeys.json
+      cd ./terraform
+      terraform init
 
 jobs:
   build-master:
