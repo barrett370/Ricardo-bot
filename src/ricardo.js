@@ -55,37 +55,37 @@ client.on('message', msg => {
                 });
 
         }
-        if (((msg.content.toLowerCase().includes("i'm")) || (msg.content.toLowerCase().includes("i am"))) && msg.author.tag !== client.user.tag) {
-
-            let message = msg.content.toLowerCase()
-            if ((message.includes("i'm"))) {
-                pref = "i'm";
-            } else {
-                pref = "i am";
-            }
-
-            let iam = message.split(pref);
-
-            iam = iam[1]
-
-            if (iam.includes(".")) {
-                iam = iam.split(".")[0]
-            } else if (iam.includes(",")) {
-                iam = iam.split(",")[0]
-            }
-            let dets = ['the', 'a', 'an'];
-            for (let i = 0; i < dets.length; i++) {
-                iam = iam.replace(new RegExp("\\b" + dets[i] + "\\b"), '')
-            }
-            let reply = "Hi" + iam + ", I'm Dad!";
-            msg.reply(reply)
-        }
         if (msg.content.toLowerCase().includes("ricardo")) {
             msg.reply({
                 files:
                     ["./resources/ricardo.gif"]
             });
         }
+    }
+    if (((msg.content.toLowerCase().includes("i'm")) || (msg.content.toLowerCase().includes("i am"))) && msg.author.tag !== client.user.tag) {
+
+        let message = msg.content.toLowerCase();
+        if ((message.includes("i'm"))) {
+            pref = "i'm";
+        } else {
+            pref = "i am";
+        }
+
+        let iam = message.split(pref);
+
+        iam = iam[1];
+
+        if (iam.includes(".")) {
+            iam = iam.split(".")[0]
+        } else if (iam.includes(",")) {
+            iam = iam.split(",")[0]
+        }
+        let dets = ['the', 'a', 'an'];
+        for (let i = 0; i < dets.length; i++) {
+            iam = iam.replace(new RegExp("\\b" + dets[i] + "\\b"), '')
+        }
+        let reply = "Hi" + iam + ", I'm Dad!";
+        msg.reply(reply)
     }
 });
 
