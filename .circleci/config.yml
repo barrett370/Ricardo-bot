@@ -28,7 +28,6 @@ jobs:
             docker push "$CI_REGISTRY_IMAGE"
   build:
     docker:
-      - image: docker:latest
       - image: docker:dind
     steps:
       - checkout
