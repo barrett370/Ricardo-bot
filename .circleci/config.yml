@@ -84,7 +84,7 @@ workflows:
           type: approval
           requires:
             - plan
-           - build-master
+            - build-master
           filters:
             branches:
               only: master
