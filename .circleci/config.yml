@@ -31,7 +31,6 @@ jobs:
       - image: docker:latest
     steps:
       - checkout
-      - *terraform_init
       - run:
           command: |
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
@@ -87,7 +86,7 @@ workflows:
           requires:
             - plan
             - build-master
-          filters:
-            branches:
-              only: master
+#          filters:
+#            branches:
+#              only: master
 
