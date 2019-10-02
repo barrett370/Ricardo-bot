@@ -31,7 +31,7 @@ jobs:
       - checkout
       - run:
           name: Terraform validate
-          command: terraform validate
+          command: cd ./terraform && terraform validate
   plan:
     docker:
       - image: hashicorp/terraform:light
@@ -39,7 +39,7 @@ jobs:
       - checkout
       - run:
           name: Terraform plan
-          command: terraform plan
+          command: cd ./terraform && terraform plan
 
   apply:
     docker:
@@ -48,7 +48,7 @@ jobs:
       - checkout
       - run:
           name: Terraform apply
-          command: terraform apply -auto-approve
+          command: cd ./terraform && terraform apply -auto-approve
 
 workflows:
   version: 2
