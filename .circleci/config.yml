@@ -1,0 +1,74 @@
+version: 2
+
+
+docker:
+  - image: hashicorp/terraform:light
+jobs:
+  build-master:
+    docker:
+      - image: docker:latest
+    steps:
+      - checkout
+      - run:
+          name: build
+          command: |
+            docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+            docker build --pull -t "$CI_REGISTRY_IMAGE" .
+            docker push "$CI_REGISTRY_IMAGE"
+  build:
+    docker:
+      - image: docker:latest
+    steps:
+      - checkout
+      - run: build-master
+        command: |
+          docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+          docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+          docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+
+  validate:
+    steps:
+      - checkout
+      - run:
+          name: Terraform validate
+          command: terraform validate
+  plan:
+    steps:
+      - checkout
+      - run:
+          name: Terraform plan
+          command: terraform plan
+
+  apply:
+    steps:
+      - checkout
+      - run:
+          name: Terraform apply
+          command: terraform apply -auto-approve
+
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: master
+      - build-master:
+          filters:
+            branches:
+              only: master
+      - validate
+      - plan:
+          requires:
+              - validate
+      - apply:
+          type: approval
+          requires:
+            - plan
+            - build-master
+          filters:
+            branches:
+              only: master
+
