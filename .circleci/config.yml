@@ -35,18 +35,18 @@ jobs:
       - run:
           command: |
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-            docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
-            docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+            docker build --pull -t "registry.gitlab.com/chasbob/ricardo-bot:$CIRCLE_BRANCH" .
+            docker push "$CI_REGISTRY_IMAGE:$CIRCLE_BRANCH"
 
   validate:
     docker:
-        - image: hashicorp/terraform:light
+      - image: hashicorp/terraform:light
     steps:
-        - checkout
-        - *terraform_init
-        - run:
-            name: Terraform validate
-            command: cd ./terraform && terraform validate
+      - checkout
+      - *terraform_init
+      - run:
+          name: Terraform validate
+          command: cd ./terraform && terraform validate
   plan:
     docker:
       - image: hashicorp/terraform:light
@@ -81,7 +81,7 @@ workflows:
       - validate
       - plan:
           requires:
-              - validate
+            - validate
       - apply:
           type: approval
           requires:
