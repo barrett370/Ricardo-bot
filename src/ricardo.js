@@ -35,7 +35,7 @@ client.on('message', msg => {
                     }
                 };
 
-                const req = https.request(options, res => {
+                const req = https.get(options, res => {
                     console.log(`statusCode: ${res.statusCode}`);
 
                     res.on('data', d => {
