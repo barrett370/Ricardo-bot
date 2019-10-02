@@ -85,7 +85,7 @@ workflows:
           requires:
             - validate
       - apply:
-          type: approval
+#          type: approval
           requires:
             - plan
 #           - build-master
