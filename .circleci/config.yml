@@ -21,8 +21,8 @@ jobs:
       - run:
           command: |
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-            docker build --pull -t "$CI_REGISTRY_IMAGE" .
-            docker push "$CI_REGISTRY_IMAGE"
+            docker build --pull -t "${CI_REGISTRY}/${REGISTRY_PATH}" .
+            docker push "${CI_REGISTRY}/${REGISTRY_PATH}"
   build:
     docker:
       - image: docker:latest
@@ -32,8 +32,8 @@ jobs:
       - run:
           command: |
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-            docker build --pull -t "registry.gitlab.com/chasbob/ricardo-bot:$CIRCLE_BRANCH" .
-            docker push "registry.gitlab.com/chasbob/ricardo-bot:$CIRCLE_BRANCH"
+            docker build --pull -t "${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH" .
+            docker push "${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH"
 
   validate:
     docker:
@@ -81,7 +81,6 @@ workflows:
           requires:
             - validate
       - apply:
-          type: approval
           requires:
             - plan
             - build-master
