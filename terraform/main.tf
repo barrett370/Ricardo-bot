@@ -28,6 +28,7 @@ resource "google_compute_instance" "vm_instance" {
   }
   network_interface {
     network = "default"
+    network_tier = "STANDARD"
     access_config {
     }
   }
