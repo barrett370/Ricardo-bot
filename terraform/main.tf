@@ -1,17 +1,18 @@
 provider "google" {
+  credentials = file("../creds/cloudKeys.json")
   project = "bot-host-253711"
-  region  = "europe-west2"
-  zone    = "europe-west2-a"
+  region = "europe-west2"
+  zone = "europe-west2-a"
 }
 
 data "google_compute_image" "search" {
-  family  = "cos-stable"
+  family = "cos-stable"
   project = "gce-uefi-images"
 
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name         = "ricardo-instance"
+  name = "ricardo-instance"
   machine_type = "f1-micro"
 
   boot_disk {
@@ -19,9 +20,16 @@ resource "google_compute_instance" "vm_instance" {
       image = data.google_compute_image.search.self_link
     }
   }
-  metadata_startup_script = "docker run barrett370/ricardo-bot:${var.docker-tag}"
+  metadata = {
+    sshKeys = "barrett370:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC750jH3Jmfy4vl1Z2EEGsf8HCSRnmIDkMEkVAx4kj6+T+9MDsuP0z2nJNiG4u4LiiSlhPQTfBo/lh40ct7FTy4L4uroH5QFKjogSZhnP5JP2UnuT4TuikBepPhNMCS0nxW4GWFPE94KEEa1CQOfByvVIyzKc0JlBH0Gy8EyIDUQF8YdR+LoD8Eyz3ZlL+ujhYxE37Xw8J77dPKZHldLS5Iv2zqKgY++IceQFhSLYNY4Qo74wwkL6YeOpj3XxScbTYl2oKf3f/FG9DkU0aiV0MMp/8q0JwPgNIhs+Z/ENBRaRryKs3KgmIRWG3rUtqhC8BQ+5o19Ln9VpcBbMPzUIQh sam@pop-os"
+
+    startup-script = <<SCRIPT
+            docker login -u "gitlab-gcloud-deployment" -p "yK6Z8hU_pQTyshes5avX" registry.gitlab.com
+            docker run registry.gitlab.com/chasbob/ricardo-bot:latest
+        SCRIPT
+
+  }
   network_interface {
-    # A default network is created for all GCP projects
     network = "default"
     access_config {
     }

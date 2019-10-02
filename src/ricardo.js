@@ -36,14 +36,13 @@ client.on('message', msg => {
                     }
 
                     const req = https.request(options, res => {
-                    console.log(`statusCode: ${res.statusCode}`)
+                        console.log(`statusCode: ${res.statusCode}`)
 
                     res.on('data', d => {
                         var jsonContent = JSON.parse(d);
                         msg.reply(jsonContent.joke)
                         process.stdout.write(d)
                     })
-                })
 
                     req.on('error', error => {
                         console.error(error)
@@ -75,9 +74,9 @@ client.on('message', msg => {
             }
             let dets = ['the', 'a', 'an'];
             for (let i = 0; i < dets.length; i++) {
-                iam = iam.replace(dets[i], '')
+                iam = iam.replace(new RegExp("\\b" + dets[i] + "\\b"), '')
             }
-            let reply = "Hi" + iam + ", I'm Dad!"
+            let reply = "Hi" + iam + ", I'm Dad!";
             msg.reply(reply)
         }
         if(msg.content.toLowerCase().includes("ricardo")){

@@ -1,4 +1,25 @@
-# This file is a template, and might need editing before it works on your project.
+image:
+  name: hashicorp/terraform:light
+  entrypoint:
+    - '/usr/bin/env'
+    - 'PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+
+before_script:
+  - mkdir -p ./creds
+  - ls ./creds
+  - echo $googleCloudCreds | base64 -d > ./creds/cloudKeys.json
+  - ls
+  - ls ./creds
+  - cat ./creds/cloudKeys.json
+  - cd ./terraform
+  - terraform init
+
+stages:
+  - build
+  - validate
+  - plan
+  - apply
+
 build-master:
   # Official docker image.
   image: docker:latest
@@ -26,3 +47,23 @@ build:
     - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
   except:
     - master
+
+tf-build:
+  stage: validate
+  script:
+    - terraform validate
+
+tf-plan:
+  stage: plan
+  script:
+    - terraform plan
+  dependencies:
+    - tf-build
+
+tf-apply:
+  stage: apply
+  script:
+    - terraform apply -auto-approve
+  dependencies:
+    - tf-plan
+  when: manual
