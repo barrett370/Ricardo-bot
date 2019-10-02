@@ -23,10 +23,7 @@ resource "google_compute_instance" "vm_instance" {
   metadata = {
     sshKeys = "barrett370:ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC750jH3Jmfy4vl1Z2EEGsf8HCSRnmIDkMEkVAx4kj6+T+9MDsuP0z2nJNiG4u4LiiSlhPQTfBo/lh40ct7FTy4L4uroH5QFKjogSZhnP5JP2UnuT4TuikBepPhNMCS0nxW4GWFPE94KEEa1CQOfByvVIyzKc0JlBH0Gy8EyIDUQF8YdR+LoD8Eyz3ZlL+ujhYxE37Xw8J77dPKZHldLS5Iv2zqKgY++IceQFhSLYNY4Qo74wwkL6YeOpj3XxScbTYl2oKf3f/FG9DkU0aiV0MMp/8q0JwPgNIhs+Z/ENBRaRryKs3KgmIRWG3rUtqhC8BQ+5o19Ln9VpcBbMPzUIQh sam@pop-os"
 
-    startup-script = <<SCRIPT
-            docker login -u "gitlab-gcloud-deployment" -p "yK6Z8hU_pQTyshes5avX" registry.gitlab.com
-            docker run registry.gitlab.com/chasbob/ricardo-bot:latest
-        SCRIPT
+    startup-script = file("./provisioning.sh")
 
   }
   network_interface {
