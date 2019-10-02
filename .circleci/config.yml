@@ -63,6 +63,7 @@ jobs:
       - image: hashicorp/terraform:light
     steps:
       - checkout
+      - *terraform_init
       - run:
           name: Terraform apply
           command: cd ./terraform && terraform apply -auto-approve
