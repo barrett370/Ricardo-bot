@@ -90,7 +90,7 @@ client.on('message', msg => {
 });
 
 
-client.login(auth.token);
+client.login(auth.token).then(r => client.user.setAvatar('src/resources/avatar.jpg'));
 
 
 process.on('SIGINT', function() {
