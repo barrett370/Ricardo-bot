@@ -1,8 +1,6 @@
 version: 2
 
 
-docker:
-  - image: hashicorp/terraform:light
 jobs:
   build-master:
     docker:
@@ -27,12 +25,16 @@ jobs:
           docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
 
   validate:
+    docker:
+      - image: hashicorp/terraform:light
     steps:
       - checkout
       - run:
           name: Terraform validate
           command: terraform validate
   plan:
+    docker:
+      - image: hashicorp/terraform:light
     steps:
       - checkout
       - run:
@@ -40,6 +42,8 @@ jobs:
           command: terraform plan
 
   apply:
+    docker:
+      - image: hashicorp/terraform:light
     steps:
       - checkout
       - run:
