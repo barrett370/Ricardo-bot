@@ -37,7 +37,7 @@ jobs:
           command: |
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
             docker build --pull -t "registry.gitlab.com/chasbob/ricardo-bot:$CIRCLE_BRANCH" .
-            docker push "$CI_REGISTRY_IMAGE:$CIRCLE_BRANCH"
+            docker push "registry.gitlab.com/chasbob/ricardo-bot:$CIRCLE_BRANCH"
 
   validate:
     docker:
