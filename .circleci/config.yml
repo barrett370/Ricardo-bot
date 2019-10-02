@@ -32,6 +32,15 @@ jobs:
       - run:
           name: Terraform validate
           command: cd ./terraform && terraform validate
+  init:
+    docker:
+      - image: hashicorp/terraform:light
+    run:
+      steps:
+        - checkout
+        - run:
+            name: Terraform init
+            command: cd ./terraform && terraform init
   plan:
     docker:
       - image: hashicorp/terraform:light
@@ -62,7 +71,10 @@ workflows:
           filters:
             branches:
               only: master
-      - validate
+      - init
+      - validate:
+          requires:
+            - init
       - plan:
           requires:
               - validate
