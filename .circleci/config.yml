@@ -52,7 +52,7 @@ jobs:
       - *terraform_init
       - run:
           name: Terraform plan
-          command: cd ./terraform && terraform plan
+          command: cd ./terraform && TF_VAR_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD terraform plan
 
   apply:
     docker:
@@ -64,8 +64,8 @@ jobs:
           name: Terraform apply
           command: |
             cd ./terraform
-            terraform destroy -auto-approve
-            terraform apply -auto-approve
+            terraform  TF_VAR_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD destroy -auto-approve
+            terraform  TF_VAR_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD  apply -auto-approve
 
 workflows:
   version: 2
