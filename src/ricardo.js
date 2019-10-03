@@ -5,23 +5,36 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
 ;
+
 client.on('message', msg => {
     let pref;
     if (msg.content.substring(0, 1) === '!') {
-        var args = msg.content.substring(1).split(' ');
-        var cmd = args[0];
+        let args = msg.content.substring(1).split(' ');
+        let cmd = args[0];
 
         switch (cmd) {
             case 'ping':
-                msg.reply("pong");
+                msg.reply("pong").then(r => {
+                    console.log(r);
+                }, function(err) {
+                    console.log(err);
+                });
                 break;
             case 'bloomberg':
-                msg.reply("bloooooombeeerrg");
+                msg.reply("bloooooombeeerrg").then(r => {
+                    console.log(r);
+                }, function(err) {
+                    console.log(err);
+                });
                 break;
             case 'bigbrain':
                 msg.reply({
                     files:
                         ["./resources/bigbrain.gif"]
+                }).then(r => {
+                    console.log(r);
+                }, function(err) {
+                    console.log(err);
                 });
                 break;
             case 'dad':
@@ -39,14 +52,22 @@ client.on('message', msg => {
                     console.log(`statusCode: ${res.statusCode}`);
 
                     res.on('data', d => {
-                        var jsonContent = JSON.parse(d);
-                        msg.reply(jsonContent.joke);
+                        let jsonContent = JSON.parse(d);
+                        msg.reply(jsonContent.joke).then(r => {
+                            console.log(r);
+                        }, function(err) {
+                            console.log(err);
+                        });
                         process.stdout.write(d)
                     });
 
                     req.on('error', error => {
-                        console.error(error)
-                        msg.reply("piss off");
+                        console.error(error);
+                        msg.reply("piss off").then(r => {
+                            console.log(r);
+                        }, function(err) {
+                            console.log(err);
+                        });
                     });
 
                     req.end()
@@ -59,6 +80,10 @@ client.on('message', msg => {
             msg.reply({
                 files:
                     ["./resources/ricardo.gif"]
+            }).then(r => {
+                console.log(r);
+            }, function(err) {
+                console.log(err);
             });
         }
     }
@@ -80,17 +105,22 @@ client.on('message', msg => {
         } else if (iam.includes(",")) {
             iam = iam.split(",")[0]
         }
-        let dets = ['the', 'a', 'an'];
-        for (let i = 0; i < dets.length; i++) {
-            iam = iam.replace(new RegExp("\\b" + dets[i] + "\\b"), '')
+        let determinants = ['the', 'a', 'an'];
+        for (let i = 0; i < determinants.length; i++) {
+            iam = iam.replace(new RegExp("\\b" + determinants[i] + "\\b"), '')
         }
         let reply = "Hi" + iam + ", I'm Dad!";
-        msg.reply(reply)
+        msg.reply(reply).then(r =>
+        {
+            console.log(r);
+        }, function(err) {
+            console.log(err);
+        });
     }
 });
 
 
-client.login(auth.token).then(r => client.user.setAvatar('src/resources/avatar.jpg'));
+client.login(auth.token).then(() => client.user.setAvatar('./resources/avatar.jpg'));
 
 
 process.on('SIGINT', function() {
