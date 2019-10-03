@@ -15,14 +15,14 @@ client.on('message', msg => {
         switch (cmd) {
             case 'ping':
                 msg.reply("pong").then(r => {
-                    console.log(r);
+                    //pass
                 }, function(err) {
                     console.log(err);
                 });
                 break;
             case 'bloomberg':
                 msg.reply("bloooooombeeerrg").then(r => {
-                    console.log(r);
+                    //pass
                 }, function(err) {
                     console.log(err);
                 });
@@ -32,7 +32,7 @@ client.on('message', msg => {
                     files:
                         ["./resources/bigbrain.gif"]
                 }).then(r => {
-                    console.log(r);
+                    //pass
                 }, function(err) {
                     console.log(err);
                 });
@@ -54,7 +54,7 @@ client.on('message', msg => {
                     res.on('data', d => {
                         let jsonContent = JSON.parse(d);
                         msg.reply(jsonContent.joke).then(r => {
-                            console.log(r);
+                            //pass
                         }, function(err) {
                             console.log(err);
                         });
@@ -64,7 +64,7 @@ client.on('message', msg => {
                     req.on('error', error => {
                         console.error(error);
                         msg.reply("piss off").then(r => {
-                            console.log(r);
+                            //pass
                         }, function(err) {
                             console.log(err);
                         });
@@ -81,7 +81,7 @@ client.on('message', msg => {
                 files:
                     ["./resources/ricardo.gif"]
             }).then(r => {
-                console.log(r);
+                //pass
             }, function(err) {
                 console.log(err);
             });
@@ -112,7 +112,7 @@ client.on('message', msg => {
         let reply = "Hi" + iam + ", I'm Dad!";
         msg.reply(reply).then(r =>
         {
-            console.log(r);
+            //pass
         }, function(err) {
             console.log(err);
         });
