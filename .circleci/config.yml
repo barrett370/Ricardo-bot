@@ -8,6 +8,7 @@ terraform_init: &terraform_init
     command: |
       mkdir -p ./creds
       echo $GOOGLE_CLOUD_CREDS | base64 -d > ./creds/cloudKeys.json
+      export TF_VAR_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD
       cd ./terraform
       terraform init
 
