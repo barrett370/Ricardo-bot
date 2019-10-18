@@ -8,7 +8,6 @@ terraform_init: &terraform_init
     command: |
       mkdir -p ./creds
       echo $GOOGLE_CLOUD_CREDS | base64 -d > ./creds/cloudKeys.json
-      echo $BOT_AUTH | base64 -d > ./src/auth.json
       cd ./terraform
       terraform init
 
@@ -21,6 +20,7 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
+            echo $BOT_AUTH | base64 -d > ./src/auth.json
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
             docker build --pull -t "${CI_REGISTRY}/${REGISTRY_PATH}" .
             docker push "${CI_REGISTRY}/${REGISTRY_PATH}"
@@ -32,6 +32,7 @@ jobs:
       - setup_remote_docker
       - run:
           command: |
+            echo $BOT_AUTH | base64 -d > ./src/auth.json
             docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
             docker build --pull -t "${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH" .
             docker push "${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH"
