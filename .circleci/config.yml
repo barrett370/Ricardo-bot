@@ -8,6 +8,7 @@ terraform_init: &terraform_init
     command: |
       mkdir -p ./creds
       echo $GOOGLE_CLOUD_CREDS | base64 -d > ./creds/cloudKeys.json
+      echo $BOT_AUTH | base64 -d > ./src/auth.json
       cd ./terraform
       terraform init
 
