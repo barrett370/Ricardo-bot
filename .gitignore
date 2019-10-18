@@ -8,3 +8,5 @@ terraform/.terraform/
 creds/cloudKeys.json
 
 creds/
+
+terraform/.terraform.tfstate.lock.info
