@@ -1,0 +1,16 @@
+DOCUMENTATION:
+  - README.md
+  - ./**/*.md
+
+RICARDO:
+  - ./src/*
+
+TERRAFORM:
+  - ./terraform/*
+
+CI:
+  - ./.circleci/*
+  - ./.github/*
+
+
+    
