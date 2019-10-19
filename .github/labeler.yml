@@ -11,6 +11,3 @@ TERRAFORM:
 CI:
   - ./.circleci/*
   - ./.github/*
-
-
-    
