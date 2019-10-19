@@ -1,4 +1,4 @@
 #!/bin/bash
 sudo useradd foo && sudo usermod -a -G docker foo
-echo "${PASSWORD}" | sudo -u foo bash -c 'docker login -u gitlab-gcloud-deployment --password-stdin registry.gitlab.com'
-sudo -u foo bash -c 'docker run  --restart unless-stopped registry.gitlab.com/chasbob/ricardo-bot:latest'
+echo "${PASSWORD}" | sudo -u foo bash -c 'docker login -u barrett370 --password-stdin docker.pkg.github.com'
+sudo -u foo bash -c 'docker run  --restart unless-stopped docker.pkg.github.com/barrett370/ricardo-bot/ricardo:latest'
