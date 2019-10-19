@@ -1,13 +1,12 @@
 DOCUMENTATION:
   - README.md
-  - ./**/*.md
 
 RICARDO:
-  - ./src/*
+  - src/*
 
 TERRAFORM:
-  - ./terraform/*
+  - terraform/*
 
 CI:
-  - ./.circleci/*
-  - ./.github/*
+  - .circleci/*
+  - .github/*
