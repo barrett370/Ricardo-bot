@@ -14,7 +14,7 @@ client.on('message', msg => {
 
         switch (cmd) {
             case 'ping':
-                msg.reply("pong").then(r => {
+                msg.reply("pong!").then(r => {
                     //pass
                 }, function(err) {
                     console.log(err);
