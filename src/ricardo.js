@@ -18,7 +18,7 @@ client.on('message', msg => {
         console.log(msg.author.username);
         console.log(ricardo_blacklist.get(msg.author.username));
         console.log((Date.now()));
-        console.log(Date.now()-(24*60*60*1000));
+        console.log(Date.now() - (24 * 60 * 60 * 1000));
         if (ricardo_blacklist.get(msg.author.username) !== undefined && ricardo_blacklist.get(msg.author.username) > (Date.now() - (24 * 60 * 60 * 1000))) {
             msg.reply("Fuck off").then(r => {
                 //pass
@@ -42,6 +42,22 @@ client.on('message', msg => {
                         console.log(err);
                     });
                     break;
+                case 'vibecheck':
+
+                    msg.reply("Initialising Vibe Check").then(r => {
+                        //pass
+                    }, function (err) {
+                        console.log(err);
+                    });
+                    // console.log(client.users);
+                    // iterator = client.users.values();
+
+                    // client.channels.get(msg.channel.id).users.forEach(vibe_check, msg);
+                    // msg.channel.
+                    client.users.forEach(vibe_check, msg);
+
+                    break;
+
                 case 'bigbrain':
                     msg.reply({
                         files:
@@ -62,23 +78,6 @@ client.on('message', msg => {
                             'Accept': 'application/json'
                         }
                     };
-                    break;
-                case 'vibecheck':
-
-                    msg.reply("Initialising Vibe Check").then(r => {
-                        //pass
-                    }, function (err) {
-                        console.log(err);
-                    });
-                    // console.log(client.users);
-                    // iterator = client.users.values();
-
-                    // client.channels.get(msg.channel.id).users.forEach(vibe_check, msg);
-                    // msg.channel.
-                    client.users.forEach(vibe_check, msg);
-
-                    break;
-
 
                     const req = https.get(options, res => {
                         console.log(`statusCode: ${res.statusCode}`);
@@ -106,6 +105,7 @@ client.on('message', msg => {
 
 
                     });
+
 
             }
         }
