@@ -6,75 +6,108 @@ client.on('ready', () => {
 })
 ;
 
+let ricardo_blacklist = new Map();
+
 client.on('message', msg => {
     let pref;
     if (msg.content.substring(0, 1) === '!') {
         let args = msg.content.substring(1).split(' ');
         let cmd = args[0];
+        console.log(args);
+        console.log(ricardo_blacklist);
+        console.log(msg.author.username);
+        console.log(ricardo_blacklist.get(msg.author.username));
+        console.log((Date.now()));
+        console.log(Date.now()-(24*60*60*1000));
+        if (ricardo_blacklist.get(msg.author.username) !== undefined && ricardo_blacklist.get(msg.author.username) > (Date.now() - (24 * 60 * 60 * 1000))) {
+            msg.reply("Fuck off").then(r => {
+                //pass
+            }, function (err) {
+                console.log(err);
+            });
+        } else {
+            switch (cmd) {
 
-        switch (cmd) {
-            case 'ping':
-                msg.reply("pong!").then(r => {
-                    //pass
-                }, function(err) {
-                    console.log(err);
-                });
-                break;
-            case 'bloomberg':
-                msg.reply("bloooooombeeerrg").then(r => {
-                    //pass
-                }, function(err) {
-                    console.log(err);
-                });
-                break;
-            case 'bigbrain':
-                msg.reply({
-                    files:
-                        ["./resources/bigbrain.gif"]
-                }).then(r => {
-                    //pass
-                }, function(err) {
-                    console.log(err);
-                });
-                break;
-            case 'dad':
-                const https = require('https');
-                const options = {
-                    hostname: 'icanhazdadjoke.com',
-                    port: "443",
-                    path: '/',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                };
+                case 'ping':
+                    msg.reply("pong!").then(r => {
+                        //pass
+                    }, function (err) {
+                        console.log(err);
+                    });
+                    break;
+                case 'bloomberg':
+                    msg.reply("bloooooombeeerrg").then(r => {
+                        //pass
+                    }, function (err) {
+                        console.log(err);
+                    });
+                    break;
+                case 'bigbrain':
+                    msg.reply({
+                        files:
+                            ["./resources/bigbrain.gif"]
+                    }).then(r => {
+                        //pass
+                    }, function (err) {
+                        console.log(err);
+                    });
+                    break;
+                case 'dad':
+                    const https = require('https');
+                    const options = {
+                        hostname: 'icanhazdadjoke.com',
+                        port: "443",
+                        path: '/',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    };
+                    break;
+                case 'vibecheck':
 
-                const req = https.get(options, res => {
-                    console.log(`statusCode: ${res.statusCode}`);
+                    msg.reply("Initialising Vibe Check").then(r => {
+                        //pass
+                    }, function (err) {
+                        console.log(err);
+                    });
+                    // console.log(client.users);
+                    // iterator = client.users.values();
 
-                    res.on('data', d => {
-                        let jsonContent = JSON.parse(d);
-                        msg.reply(jsonContent.joke).then(r => {
-                            //pass
-                        }, function(err) {
-                            console.log(err);
+                    // client.channels.get(msg.channel.id).users.forEach(vibe_check, msg);
+                    // msg.channel.
+                    client.users.forEach(vibe_check, msg);
+
+                    break;
+
+
+                    const req = https.get(options, res => {
+                        console.log(`statusCode: ${res.statusCode}`);
+
+                        res.on('data', d => {
+                            let jsonContent = JSON.parse(d);
+                            msg.reply(jsonContent.joke).then(r => {
+                                //pass
+                            }, function (err) {
+                                console.log(err);
+                            });
+                            process.stdout.write(d)
                         });
-                        process.stdout.write(d)
+
+                        req.on('error', error => {
+                            console.error(error);
+                            msg.reply("piss off").then(r => {
+                                //pass
+                            }, function (err) {
+                                console.log(err);
+                            });
+                        });
+
+                        req.end()
+
+
                     });
 
-                    req.on('error', error => {
-                        console.error(error);
-                        msg.reply("piss off").then(r => {
-                            //pass
-                        }, function(err) {
-                            console.log(err);
-                        });
-                    });
-
-                    req.end()
-
-
-                });
-
+            }
         }
         if (msg.content.toLowerCase().includes("ricardo")) {
             msg.reply({
@@ -82,7 +115,7 @@ client.on('message', msg => {
                     ["./resources/ricardo.gif"]
             }).then(r => {
                 //pass
-            }, function(err) {
+            }, function (err) {
                 console.log(err);
             });
         }
@@ -110,19 +143,60 @@ client.on('message', msg => {
             iam = iam.replace(new RegExp("\\b" + determinants[i] + "\\b"), '')
         }
         let reply = "Hi" + iam + ", I'm Dad!";
-        msg.reply(reply).then(r =>
-        {
+        msg.reply(reply).then(r => {
             //pass
-        }, function(err) {
+        }, function (err) {
             console.log(err);
         });
     }
 });
 
+function vibe_check(value) {
+    this.reply("Checking " + value.username + "'s vibes").then(r => {
+        //pass
+    }, function (err) {
+        console.log(err);
+    });
+    this.reply(".............").then(r => {
+        //pass
+    }, function (err) {
+        console.log(err);
+    });
+    this.reply("..................................").then(r => {
+        //pass
+    }, function (err) {
+        console.log(err);
+    });
+    this.reply("........................................................").then(r => {
+        //pass
+    }, function (err) {
+        console.log(err);
+    });
+    const min = 1;
+    const max = 10;
+    let random =
+        Math.floor(Math.random() * (+max - +min)) + +min;
+    if (random !== 132) {
+        this.reply("FAILED!, " + value.username + " has bad vibes, you have lost ricardo privileges for 24hrs ").then(r => {
+            //pass
+        }, function (err) {
+            console.log(err);
+        });
+
+        ricardo_blacklist.set(value.username, Date.now());
+    } else {
+        this.reply("PASSED").then(r => {
+            //pass
+        }, function (err) {
+            console.log(err);
+        });
+    }
+}
+
 
 client.login(auth.token).then(() => client.user.setAvatar('./resources/avatar.jpg'));
 
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
     process.exit();
 });
