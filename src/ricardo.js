@@ -176,7 +176,7 @@ function vibe_check(value) {
     const max = 10;
     let random =
         Math.floor(Math.random() * (+max - +min)) + +min;
-    if (random !== 132) {
+    if (random === 1) {
         this.reply("FAILED!, " + value.username + " has bad vibes, you have lost ricardo privileges for 24hrs ").then(r => {
             //pass
         }, function (err) {
