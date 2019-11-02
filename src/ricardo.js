@@ -5,7 +5,14 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 })
 ;
-
+const dad_joke_options = {
+    hostname: 'icanhazdadjoke.com',
+    port: "443",
+    path: '/',
+    headers: {
+        'Accept': 'application/json'
+    }
+};
 let ricardo_blacklist = new Map();
 const https = require('https');
 client.on('message', msg => {
@@ -46,7 +53,7 @@ client.on('message', msg => {
             iam = iam.replace(new RegExp("\\b" + determinants[i] + "\\b"), '')
         }
         let reply = "Hi" + iam + ", I'm Dad!";
-        msg.reply(reply).then(r => {
+        msg.reply(reply).then(() => {
             //pass
         }, function (err) {
             console.log(err);
@@ -91,23 +98,16 @@ function case_response(cmd, msg) {
             msg.reply({
                 files:
                     ["./resources/bigbrain.gif"]
-            }).then(r => {
+
+            }).then(() => {
                 //pass
             }, function (err) {
                 console.log(err);
             });
             break;
         case 'dad':
-            const options = {
-                hostname: 'icanhazdadjoke.com',
-                port: "443",
-                path: '/',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            };
+            let req = https.get(dad_joke_options, res => {
 
-            const req = https.get(options, res => {
                 console.log(`statusCode: ${res.statusCode}`);
 
                 res.on('data', d => {
