@@ -107,7 +107,6 @@ function case_response(cmd, msg) {
             break;
         case 'dad':
             let req = https.get(dad_joke_options, res => {
-
                 console.log(`statusCode: ${res.statusCode}`);
 
                 res.on('data', d => {
