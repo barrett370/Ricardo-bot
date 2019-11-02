@@ -98,6 +98,7 @@ function case_response(cmd, msg) {
             msg.reply({
                 files:
                     ["./resources/bigbrain.gif"]
+
             }).then(() => {
                 //pass
             }, function (err) {
@@ -105,8 +106,8 @@ function case_response(cmd, msg) {
             });
             break;
         case 'dad':
-
             let req = https.get(dad_joke_options, res => {
+
                 console.log(`statusCode: ${res.statusCode}`);
 
                 res.on('data', d => {
