@@ -59,6 +59,13 @@ client.on('message', msg => {
             console.log(err);
         });
     }
+    if (msg.content.includes("www.bloomberg.com")){
+        msg.reply("@everyone, BLOOMBERG ALERT!!").then(() => {
+            //pass
+        }, function (err) {
+            console.log(err);
+        });
+    }
 });
 
 function case_response(cmd, msg) {
@@ -107,7 +114,6 @@ function case_response(cmd, msg) {
             break;
         case 'dad':
             let req = https.get(dad_joke_options, res => {
-
                 console.log(`statusCode: ${res.statusCode}`);
 
                 res.on('data', d => {
