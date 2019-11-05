@@ -59,6 +59,13 @@ client.on('message', msg => {
             console.log(err);
         });
     }
+    if (msg.content.includes("www.bloomberg.com")){
+        msg.reply("@everyone, BLOOMBERG ALERT!!").then(() => {
+            //pass
+        }, function (err) {
+            console.log(err);
+        });
+    }
 });
 
 function case_response(cmd, msg) {
