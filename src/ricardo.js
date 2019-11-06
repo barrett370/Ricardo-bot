@@ -148,7 +148,7 @@ function case_response(cmd, msg) {
                 console.log(err);
             });
         case 'motivationmonday':
-            msg.reply({})
+            msg.reply(pick_random_quote())
             then(() => {
                 //pass
             }, function (err) {
