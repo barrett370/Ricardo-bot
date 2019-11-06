@@ -147,8 +147,14 @@ function case_response(cmd, msg) {
             }, function (err) {
                 console.log(err);
             });
+            break;
+        case 'motivationmonday':
+            msg.reply(pick_random_quote()).then(() => {
+                //pass
+            }, function (err) {
+                console.log(err);
+            });
     }
-
 }
 
 
@@ -194,6 +200,11 @@ function vibe_check(value) {
     }
 }
 
+function pick_random_quote() {
+    const array = require('./resources/quotes.json');
+    console.log(array);
+    return array[Math.floor(Math.random() * array.length)];
+}
 
 client.login(auth.token).then(() => client.user.setAvatar('./resources/avatar.jpg'));
 
