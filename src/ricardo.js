@@ -147,8 +147,14 @@ function case_response(cmd, msg) {
             }, function (err) {
                 console.log(err);
             });
+        case 'motivationmonday':
+            msg.reply({})
+            then(() => {
+                //pass
+            }, function (err) {
+                console.log(err);
+            });
     }
-
 }
 
 
@@ -194,7 +200,18 @@ function vibe_check(value) {
     }
 }
 
+function pick_random_quote(){
+    var array = JSON.parse('src/resources/quotes.json');
+    var item = array[Math.floor(Math.random()*array.length)];
+    this.reply(item).then(() => {
+        //pass
+    }, function (err) {
+        console.log(err);
+    });
 
+
+
+}
 client.login(auth.token).then(() => client.user.setAvatar('./resources/avatar.jpg'));
 
 
