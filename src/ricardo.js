@@ -154,6 +154,17 @@ function case_response(cmd, msg) {
             }, function (err) {
                 console.log(err);
             });
+            break;
+        case 'shame':
+            msg.reply({
+                files:
+                    ["./resources/shame.gif"]
+            }).then(() => {
+                //pass
+            }, function (err) {
+                console.log(err);
+            });
+            break;
     }
 }
 
