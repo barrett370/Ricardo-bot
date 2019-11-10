@@ -1,8 +1,8 @@
 provider "google" {
   credentials = file("../creds/cloudKeys.json")
   project = "bot-host-253711"
-  region = "europe-west2"
-  zone = "europe-west2-a"
+  region = "us-west1"
+  zone = "us-west1-a"
 }
 
 data "google_compute_image" "search" {
