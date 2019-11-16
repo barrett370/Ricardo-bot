@@ -141,7 +141,7 @@ function case_response(cmd, msg) {
         case 'ricardo':
             msg.reply({
                 files:
-                    ["./resources/ricardo.gif"]
+                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/ricardo.gif"]
             }).then(() => {
                 //pass
             }, function (err) {
@@ -158,7 +158,7 @@ function case_response(cmd, msg) {
         case 'shame':
             msg.reply({
                 files:
-                    ["./resources/shame.gif"]
+                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/shame.gif"]
             }).then(() => {
                 //pass
             }, function (err) {
@@ -212,12 +212,12 @@ function vibe_check(value) {
 }
 
 function pick_random_quote() {
-    const array = require('./resources/quotes.json');
+    const array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/quotes.json');
     console.log(array);
     return array[Math.floor(Math.random() * array.length)];
 }
 
-client.login(auth.token).then(() => client.user.setAvatar('./resources/avatar.jpg'));
+client.login(auth.token).then(() => client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/avatar.jpg'));
 
 
 process.on('SIGINT', function () {
