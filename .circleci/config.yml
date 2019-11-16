@@ -12,18 +12,6 @@ terraform_init: &terraform_init
       terraform init
 
 jobs:
-  build-master:
-    docker:
-      - image: docker:latest
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          command: |
-            echo $BOT_AUTH | base64 -d > ./src/auth.json
-            docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-            docker build --pull -t "${CI_REGISTRY}/${REGISTRY_PATH}" .
-            docker push "${CI_REGISTRY}/${REGISTRY_PATH}"
   build:
     docker:
       - image: docker:latest
@@ -73,14 +61,7 @@ workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore: master
-      - build-master:
-          filters:
-            branches:
-              only: master
+      - build
       - validate
       - plan:
           requires:
@@ -88,7 +69,7 @@ workflows:
       - apply:
           requires:
             - plan
-            - build-master
+            - build
           filters:
             branches:
               only: master
