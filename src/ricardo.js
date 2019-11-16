@@ -104,7 +104,7 @@ function case_response(cmd, msg) {
         case 'bigbrain':
             msg.reply({
                 files:
-                    ["./resources/bigbrain.gif"]
+                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/bigbrain.gif"]
 
             }).then(() => {
                 //pass
