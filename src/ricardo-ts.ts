@@ -10,6 +10,7 @@ import {
 
 // import auth = require('./auth.json');
 import * as auth from "./auth.json"
+
 let ricardo_blacklist: Map<string, number> = new Map();
 // import https = require('https');
 import * as https from "https"
@@ -28,16 +29,13 @@ const dad_joke_options = {
 export class AppDiscord {
     private static _client: Client;
     private _prefix: string = "!";
-    private _commandNotFoundMessage: string = "Command not found.";
-
 
     static start() {
         this._client = new Client();
         this._client.login(
             auth.token,
-        ).then(function () {
-            //pass
-        });
+            `${__dirname}/*Discord.ts`
+        ).then(() => this._client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/avatar.jpg'));
     }
 
     @On("message")
@@ -100,7 +98,7 @@ function case_response(cmd: string, msg: Message) {
 
         case 'ping':
             msg.reply("pong!").then(() => {
-                //pass
+                console.log('pong!')
             }, function (err: any) {
                 console.log(err);
             });
@@ -235,7 +233,7 @@ function vibe_check(value: { username: string; }) {
 
 function pick_random_quote() {
     const array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/quotes.json');
-    console.log(array);
+    // console.log(array);
     return array[Math.floor(Math.random() * array.length)];
 }
 

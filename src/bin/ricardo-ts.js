@@ -41,13 +41,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 var discord_1 = require("@typeit/discord");
 // import auth = require('./auth.json');
-var auth = require("./auth.json");
+var auth = __importStar(require("./auth.json"));
 var ricardo_blacklist = new Map();
 // import https = require('https');
-var https = require("https");
+var https = __importStar(require("https"));
 var dad_joke_options = {
     hostname: 'icanhazdadjoke.com',
     port: "443",
@@ -59,13 +66,11 @@ var dad_joke_options = {
 var AppDiscord = /** @class */ (function () {
     function AppDiscord() {
         this._prefix = "!";
-        this._commandNotFoundMessage = "Command not found.";
     }
     AppDiscord.start = function () {
+        var _this = this;
         this._client = new discord_1.Client();
-        this._client.login(auth.token).then(function () {
-            //pass
-        });
+        this._client.login(auth.token, __dirname + "/*Discord.ts").then(function () { return _this._client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/avatar.jpg'); });
     };
     AppDiscord.prototype.onMessage = function (message, client) {
         return __awaiter(this, void 0, void 0, function () {
@@ -125,7 +130,7 @@ var AppDiscord = /** @class */ (function () {
     };
     __decorate([
         discord_1.On("message")
-    ], AppDiscord.prototype, "onMessage");
+    ], AppDiscord.prototype, "onMessage", null);
     AppDiscord = __decorate([
         discord_1.Discord
     ], AppDiscord);
@@ -136,7 +141,7 @@ function case_response(cmd, msg) {
     switch (cmd) {
         case 'ping':
             msg.reply("pong!").then(function () {
-                //pass
+                console.log('pong!');
             }, function (err) {
                 console.log(err);
             });
@@ -259,7 +264,7 @@ function vibe_check(value) {
 }
 function pick_random_quote() {
     var array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/quotes.json');
-    console.log(array);
+    // console.log(array);
     return array[Math.floor(Math.random() * array.length)];
 }
 AppDiscord.start();
