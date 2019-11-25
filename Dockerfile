@@ -1,6 +1,6 @@
 FROM node:alpine
 
-COPY ./src .
+COPY ./src/bin .
 
 RUN npm install
-ENTRYPOINT [ "node", "ricardo.js" ]
+ENTRYPOINT [ "node", "ricardo-ts.js" ]

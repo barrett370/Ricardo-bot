@@ -12,3 +12,4 @@ creds/
 terraform/.terraform.tfstate.lock.info
 
 src/auth.json
+src/bin/auth.json

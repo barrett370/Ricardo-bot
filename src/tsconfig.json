@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "watch": true,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "outDir": "./bin",
+        "moduleResolution": "node",
+        "esModuleInterop": true
+    }
+}
