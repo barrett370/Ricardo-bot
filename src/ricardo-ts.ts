@@ -35,7 +35,7 @@ export class AppDiscord {
         this._client.login(
             auth.token,
             `${__dirname}/*Discord.ts`
-        ).then(() => this._client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/avatar.jpg'));
+        ).then(() => this._client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/avatar.jpg'));
     }
 
     @On("message")
@@ -232,7 +232,7 @@ function vibe_check(value: { username: string; }) {
 }
 
 function pick_random_quote() {
-    const array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/quotes.json');
+    const array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/quotes.json');
     // console.log(array);
     return array[Math.floor(Math.random() * array.length)];
 }

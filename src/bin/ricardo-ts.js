@@ -70,7 +70,7 @@ var AppDiscord = /** @class */ (function () {
     AppDiscord.start = function () {
         var _this = this;
         this._client = new discord_1.Client();
-        this._client.login(auth.token, __dirname + "/*Discord.ts").then(function () { return _this._client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/avatar.jpg'); });
+        this._client.login(auth.token, __dirname + "/*Discord.ts").then(function () { return _this._client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/avatar.jpg'); });
     };
     AppDiscord.prototype.onMessage = function (message, client) {
         return __awaiter(this, void 0, void 0, function () {
@@ -263,7 +263,7 @@ function vibe_check(value) {
     }
 }
 function pick_random_quote() {
-    var array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/quotes.json');
+    var array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/quotes.json');
     // console.log(array);
     return array[Math.floor(Math.random() * array.length)];
 }
