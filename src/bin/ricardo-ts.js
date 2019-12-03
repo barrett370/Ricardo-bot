@@ -195,7 +195,7 @@ function case_response(cmd, msg) {
             break;
         case 'ricardo':
             msg.reply({
-                files: ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/ricardo.gif"]
+                files: ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/ricardo.gif"]
             }).then(function () {
                 //pass
             }, function (err) {
@@ -211,7 +211,7 @@ function case_response(cmd, msg) {
             break;
         case 'shame':
             msg.reply({
-                files: ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/resources/shame.gif"]
+                files: ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/shame.gif"]
             }).then(function () {
                 //pass
             }, function (err) {
@@ -263,7 +263,7 @@ function vibe_check(value) {
     }
 }
 function pick_random_quote() {
-    var array = require('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/quotes.json');
+    var array = require('./resources/quotes.json');
     // console.log(array);
     return array[Math.floor(Math.random() * array.length)];
 }
