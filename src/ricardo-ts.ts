@@ -183,6 +183,16 @@ function case_response(cmd: string, msg: Message) {
                 console.log(err);
             });
             break;
+	case 'coronatime':
+            msg.reply({
+                files:
+                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/coronatime.jpg"]
+            }).then(() => {
+                //pass
+            }, function (err: any) {
+                console.log(err);
+            });
+		break;
         default:
             console.log(this._commandNotFoundMessage);
     }
