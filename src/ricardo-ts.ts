@@ -192,7 +192,7 @@ function case_response(cmd: string, msg: Message) {
             }, function (err: any) {
                 console.log(err);
             });
-		break;
+	    break;
         default:
             console.log(this._commandNotFoundMessage);
     }
