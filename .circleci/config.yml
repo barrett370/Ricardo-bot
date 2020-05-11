@@ -21,9 +21,9 @@ jobs:
       - run:
           command: |
             echo $BOT_AUTH | base64 -d > ./src/auth.json
-            docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-            docker build --pull -t "${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH" .
-            docker push "${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH"
+            docker login $CI_REGISTRY -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD 
+            docker build --pull -t ${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH .
+            docker push ${CI_REGISTRY}/${REGISTRY_PATH}:$CIRCLE_BRANCH
 
   validate:
     docker:
