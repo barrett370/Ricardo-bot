@@ -11,7 +11,9 @@ creds/
 
 terraform/.terraform.tfstate.lock.info
 terraform/.terraform.tfstate
+terraform/.terraform.tfstate.backup
 
 src/auth.json
 src/bin/auth.json
 bin/
+terraform.tfvars
