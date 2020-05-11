@@ -14,3 +14,4 @@ terraform/.terraform.tfstate
 
 src/auth.json
 src/bin/auth.json
+bin/
