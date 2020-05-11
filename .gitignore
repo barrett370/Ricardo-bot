@@ -10,6 +10,7 @@ creds/cloudKeys.json
 creds/
 
 terraform/.terraform.tfstate.lock.info
+terraform/.terraform.tfstate
 
 src/auth.json
 src/bin/auth.json
