@@ -54,7 +54,7 @@ jobs:
           name: Terraform apply
           command: |
             cd ./terraform
-            TF_VAR_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD terraform apply 
+          TF_VAR_DOCKER_PASSWORD=$CI_REGISTRY_PASSWORD terraform apply -auto-approve
 
 
 workflows:
