@@ -8,6 +8,7 @@ import {
     Message,
 } from "discord.js"
 
+
 // import auth = require('./auth.json');
 import * as auth from "./auth.json"
 
@@ -24,7 +25,7 @@ const dad_joke_options = {
     }
 
 };
-
+const siteURL: string = "http://barrett370.github.io/Ricardo-bot/ricardo-resources/"
 @Discord
 export class AppDiscord {
     private static _client: Client;
@@ -35,7 +36,7 @@ export class AppDiscord {
         this._client.login(
             auth.token,
             `${__dirname}/*Discord.ts`
-        ).then(() => this._client.user.setAvatar('http://sam-barrett.codes/Ricardo-bot/ricardo-resources/avatar.jpg'));
+        ).then(() => this._client.user.setAvatar(siteURL + 'avatar.jpg'));
     }
 
     @On("message")
@@ -123,7 +124,7 @@ function case_response(cmd: string, msg: Message) {
         case 'bigbrain':
             msg.reply({
                 files:
-                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/bigbrain.gif"]
+                    [ siteURL + "bigbrain.gif"]
             }).then(() => {
                 //pass
             }, function (err: any) {
@@ -159,7 +160,7 @@ function case_response(cmd: string, msg: Message) {
         case 'ricardo':
             msg.reply({
                 files:
-                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/ricardo.gif"]
+                    [siteURL+ "ricardo.gif"]
             }).then(() => {
                 //pass
             }, function (err: any) {
@@ -176,7 +177,7 @@ function case_response(cmd: string, msg: Message) {
         case 'shame':
             msg.reply({
                 files:
-                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/shame.gif"]
+                    [siteURL + "shame.gif"]
             }).then(() => {
                 //pass
             }, function (err: any) {
@@ -186,7 +187,7 @@ function case_response(cmd: string, msg: Message) {
 	case 'coronatime':
             msg.reply({
                 files:
-                    ["http://sam-barrett.codes/Ricardo-bot/ricardo-resources/coronatime.jpg"]
+                    [siteURL + "coronatime.jpg"]
             }).then(() => {
                 //pass
             }, function (err: any) {
