@@ -2,7 +2,7 @@
 .idea/
 
 src/node_modules/
-
+node_modules/
 terraform/.terraform/
 
 creds/cloudKeys.json

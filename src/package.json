@@ -18,6 +18,8 @@
   "homepage": "https://github.com/barrett370/Ricardo-bot#readme",
   "dependencies": {
     "@typeit/discord": "^1.0.3",
+    "bs-platform": "^9.0.2",
+    "curry.js": "^0.1.4",
     "discord.js": "^11.5.1",
     "fetch": "^1.1.0",
     "http": "0.0.0",

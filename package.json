@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "bs-platform": "^9.0.2",
+    "discord.js": "^12.5.3"
+  }
+}
