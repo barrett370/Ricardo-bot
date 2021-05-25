@@ -2,9 +2,6 @@ type msg = {
   content: string,
   reply: (. string) => unit,
 }
-type event =
-  | Ready
-  | Message
 type user = {tag: string}
 type client = {
   login: (. string) => unit,

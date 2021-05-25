@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "watch": true,
+        "module":"CommonJS",
         "experimentalDecorators": true,
         "allowJs": true,
         "resolveJsonModule": true,

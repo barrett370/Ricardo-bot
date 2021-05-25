@@ -131,6 +131,16 @@ function case_response(cmd: string, msg: Message) {
                 console.log(err);
             });
             break;
+        case 'indeed':
+            msg.reply({
+                files:
+                    [ siteURL + "indeed.jpeg"]
+            }).then(() => {
+                //pass
+            }, function (err: any) {
+                console.log(err);
+            });
+            break;
         case 'dad':
             let req = https.get(dad_joke_options, res => {
                 console.log(`statusCode: ${res.statusCode}`);
