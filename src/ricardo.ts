@@ -40,7 +40,12 @@ const rest = new REST({ version: '9' }).setToken(token);
 
 })()
 
+client.on('message', message => {
+    console.log(message);
+})
+
 client.on('messageCreate', async message => {
+    console.log(message);
     let pref: string;
     if (((message.content.toLowerCase().includes("i'm")) || (message.content.toLowerCase().includes("i am"))) && message.author.tag !== client.user.tag) {
 
@@ -105,12 +110,9 @@ client.on('interactionCreate', async interaction => {
             break
         case 'dad':
             let req = https.get(dad_joke_options, async res => {
-                console.log(`statusCode: ${res.statusCode}`);
-
                 res.on('data', async d => {
                     let jsonContent = JSON.parse(d);
                     await interaction.reply(jsonContent.joke)
-                    process.stdout.write(d)
                 });
             });
 
