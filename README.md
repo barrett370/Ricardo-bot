@@ -1,6 +1,6 @@
 # Ricardo-bot
 [![CodeFactor](https://www.codefactor.io/repository/github/barrett370/ricardo-bot/badge/master)](https://www.codefactor.io/repository/github/barrett370/ricardo-bot/overview/master)
-[![CircleCI](https://circleci.com/gh/barrett370/Ricardo-bot.svg?style=svg)](https://circleci.com/gh/barrett370/Ricardo-bot)
+[![Docker](https://github.com/barrett370/Ricardo-bot/actions/workflows/docker-publish.yaml/badge.svg)](https://github.com/barrett370/Ricardo-bot/actions/workflows/docker-publish.yaml)
 
 ## Setup
 

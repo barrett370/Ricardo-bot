@@ -12,13 +12,11 @@ const dad_joke_options = {
     }
 
 };
-const siteURL: string = "http://barrett370.github.io/Ricardo-bot/ricardo-resources/"
-
-deployCommands()
-
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-import { token } from "./auth.json"
+const token = process.env.TOKEN
+
+deployCommands()
 
 client.on('messageCreate', async message => {
     let pref: string;
@@ -54,10 +52,15 @@ client.on('messageCreate', async message => {
     }
     if (message.content.toLowerCase().includes("indeed")) {
         message.reply({
-            files: [siteURL + "indeed.jpeg"]
+            files: ["./resources/imgs/indeed.jpeg"]
         })
     }
 });
+
+client.on("message", message => {
+    console.log(message);
+    
+})
 
 client.once('ready', () => {
     console.log("ready!")
@@ -70,41 +73,46 @@ client.on('interactionCreate', async interaction => {
 
     const {commandName} = interaction
 
-    switch (commandName) {
-        case 'ping':
+    if (commandName === "ping"){
             console.log("pinging")
             await interaction.reply("pong!");
-            break
-        case 'bigbrain':
-            await interaction.reply({ files: [siteURL + "bigbrain.gif"] })
-            break
-        case 'dad':
-            let req = https.get(dad_joke_options, async res => {
-                console.log(`statusCode: ${res.statusCode}`);
-
-                res.on('data', async d => {
-                    let jsonContent = JSON.parse(d);
-                    await interaction.reply(jsonContent.joke)
-                    process.stdout.write(d)
-                });
-            });
-
-            req.on('error', async (error) => {
-                console.error(error)
-                await interaction.reply("All outta jokes")
-            });
-            req.end();
-            break;
-        case 'motivationmonday':
-            await interaction.reply(pick_random_quote())
-            break;
-        case 'shame':
-            await interaction.reply({
-                files:
-                    [siteURL + "shame.gif"]
-            })
-            break;
     }
+
+    // switch (commandName) {
+    //     case 'ping':
+    //         console.log("pinging")
+    //         await interaction.reply("pong!");
+    //         break
+    //     case 'bigbrain':
+    //         await interaction.reply({ files: [siteURL + "bigbrain.gif"] })
+    //         break
+    //     case 'dad':
+    //         let req = https.get(dad_joke_options, async res => {
+    //             console.log(`statusCode: ${res.statusCode}`);
+
+    //             res.on('data', async d => {
+    //                 let jsonContent = JSON.parse(d);
+    //                 await interaction.reply(jsonContent.joke)
+    //                 process.stdout.write(d)
+    //             });
+    //         });
+
+    //         req.on('error', async (error) => {
+    //             console.error(error)
+    //             await interaction.reply("All outta jokes")
+    //         });
+    //         req.end();
+    //         break;
+    //     case 'motivationmonday':
+    //         await interaction.reply(pick_random_quote())
+    //         break;
+    //     case 'shame':
+    //         await interaction.reply({
+    //             files:
+    //                 [siteURL + "shame.gif"]
+    //         })
+    //         break;
+    // }
 
 });
 

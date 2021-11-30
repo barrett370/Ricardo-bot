@@ -10,6 +10,9 @@ RUN tsc
 
 FROM node:alpine
 
+ENV TOKEN ""
+ENV CLIENT_ID ""
+
 RUN mkdir /app
 COPY --from=bob /app/bin /app
 COPY ./src/resources/img /app/resources

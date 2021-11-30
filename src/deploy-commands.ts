@@ -2,9 +2,10 @@
 import { REST } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v9"
 import { SlashCommandBuilder } from "@discordjs/builders";
-import { clientID, guildID, token } from "./auth.json"
 
 export async function deployCommands() {
+    const token = process.env.TOKEN
+    const clientID = process.env.CLIENT_ID
     const commands = [
         new SlashCommandBuilder().setName("ping").setDescription("replies with pong"),
         new SlashCommandBuilder().setName("bigbrain").setDescription("you figure it out, smart guy"),

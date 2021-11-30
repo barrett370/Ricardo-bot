@@ -16,3 +16,5 @@ terraform/.terraform.tfstate.backup
 src/auth.json
 bin/
 terraform.tfvars
+.env
+.direnv/
