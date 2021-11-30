@@ -15,7 +15,7 @@ const dad_joke_options = {
 
 };
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const token = process.env.TOKEN
 const clientID = process.env.CLIENT_ID
 
@@ -39,10 +39,6 @@ const rest = new REST({ version: '9' }).setToken(token);
     console.log("registered commands")
 
 })()
-
-client.on('message', message => {
-    console.log(message);
-})
 
 client.on('messageCreate', async message => {
     console.log(message);
