@@ -74,7 +74,7 @@ client.on('messageCreate', async message => {
     }
     if (message.content.toLowerCase().includes("indeed")) {
         message.reply({
-            files: ["./resources/imgs/indeed.jpeg"]
+            files: ["./resources/indeed.jpeg"]
         })
     }
 });
@@ -101,7 +101,7 @@ client.on('interactionCreate', async interaction => {
             await interaction.reply("pong!");
             break
         case 'bigbrain':
-            await interaction.reply({ files: ["./resources/imgs/bigbrain.gif"] })
+            await interaction.reply({ files: ["./resources/bigbrain.gif"] })
             break
         case 'dad':
             let req = https.get(dad_joke_options, async res => {
@@ -126,7 +126,7 @@ client.on('interactionCreate', async interaction => {
         case 'shame':
             await interaction.reply({
                 files:
-                    ["./resources/imgs/shame.gif"]
+                    ["./resources/shame.gif"]
             })
             break;
     }
