@@ -1,7 +1,9 @@
 import * as https from "https"
 import * as quotes from "./resources/quotes.json";
 import { Client, Intents } from "discord.js"
-import {deployCommands} from "./deploy-commands"
+import { REST } from "@discordjs/rest"
+import { Routes } from "discord-api-types/v9"
+import { SlashCommandBuilder } from "@discordjs/builders";
 
 const dad_joke_options = {
     hostname: 'icanhazdadjoke.com',
@@ -15,8 +17,28 @@ const dad_joke_options = {
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 const token = process.env.TOKEN
+const clientID = process.env.CLIENT_ID
 
-deployCommands()
+const commands = [
+    new SlashCommandBuilder().setName("ping").setDescription("replies with pong"),
+    new SlashCommandBuilder().setName("bigbrain").setDescription("you figure it out, smart guy"),
+    new SlashCommandBuilder().setName("dad").setDescription("make a joke"),
+    new SlashCommandBuilder().setName("motivationmonday").setDescription("get you going"),
+    new SlashCommandBuilder().setName("shame").setDescription("shameful display"),
+].map(command => command.toJSON());
+
+
+const rest = new REST({ version: '9' }).setToken(token);
+
+(async () => {
+
+    await rest.put(
+        Routes.applicationCommands(clientID),
+        { body: commands }
+    )
+    console.log("registered commands")
+
+})()
 
 client.on('messageCreate', async message => {
     let pref: string;
@@ -59,7 +81,7 @@ client.on('messageCreate', async message => {
 
 client.on("message", message => {
     console.log(message);
-    
+
 })
 
 client.once('ready', () => {
@@ -68,51 +90,46 @@ client.once('ready', () => {
 
 client.on('interactionCreate', async interaction => {
     console.log(interaction);
-    
+
     if (!interaction.isCommand()) return;
 
-    const {commandName} = interaction
+    const { commandName } = interaction
 
-    if (commandName === "ping"){
+    switch (commandName) {
+        case 'ping':
             console.log("pinging")
             await interaction.reply("pong!");
+            break
+        case 'bigbrain':
+            await interaction.reply({ files: ["./resources/imgs/bigbrain.gif"] })
+            break
+        case 'dad':
+            let req = https.get(dad_joke_options, async res => {
+                console.log(`statusCode: ${res.statusCode}`);
+
+                res.on('data', async d => {
+                    let jsonContent = JSON.parse(d);
+                    await interaction.reply(jsonContent.joke)
+                    process.stdout.write(d)
+                });
+            });
+
+            req.on('error', async (error) => {
+                console.error(error)
+                await interaction.reply("All outta jokes")
+            });
+            req.end();
+            break;
+        case 'motivationmonday':
+            await interaction.reply(pick_random_quote())
+            break;
+        case 'shame':
+            await interaction.reply({
+                files:
+                    ["./resources/imgs/shame.gif"]
+            })
+            break;
     }
-
-    // switch (commandName) {
-    //     case 'ping':
-    //         console.log("pinging")
-    //         await interaction.reply("pong!");
-    //         break
-    //     case 'bigbrain':
-    //         await interaction.reply({ files: [siteURL + "bigbrain.gif"] })
-    //         break
-    //     case 'dad':
-    //         let req = https.get(dad_joke_options, async res => {
-    //             console.log(`statusCode: ${res.statusCode}`);
-
-    //             res.on('data', async d => {
-    //                 let jsonContent = JSON.parse(d);
-    //                 await interaction.reply(jsonContent.joke)
-    //                 process.stdout.write(d)
-    //             });
-    //         });
-
-    //         req.on('error', async (error) => {
-    //             console.error(error)
-    //             await interaction.reply("All outta jokes")
-    //         });
-    //         req.end();
-    //         break;
-    //     case 'motivationmonday':
-    //         await interaction.reply(pick_random_quote())
-    //         break;
-    //     case 'shame':
-    //         await interaction.reply({
-    //             files:
-    //                 [siteURL + "shame.gif"]
-    //         })
-    //         break;
-    // }
 
 });
 
