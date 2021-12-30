@@ -73,11 +73,6 @@ client.on('messageCreate', async message => {
         });
         return
     }
-    if (message.content.toLowerCase().includes("indeed")) {
-        message.reply({
-            files: ["./resources/indeed.jpeg"]
-        })
-    }
 });
 
 client.on("message", message => {
