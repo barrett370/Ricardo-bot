@@ -30,7 +30,7 @@ const commands = [
 
 
 const rest = new REST({ version: '9' }).setToken(token);
-const wang = new RegExp("\d")
+const wang = new RegExp("\d");
 
 (async () => {
 
@@ -68,12 +68,12 @@ client.on('messageCreate', async message => {
             iam = iam.replace(new RegExp("\\b" + determinants[i] + "\\b"), '')
         }
         let reply = "Hi" + iam + ", I'm Dad!";
-        message.reply(reply).then(() => {
-            //pass
-        }, function (err) {
-            console.log(err);
-        });
+        let ok = await message.reply(reply) 
+        if (!ok) {
+            console.error("failed to reply")
+        }
         return
+            
     }
     if (message.content.toLowerCase().includes("indeed")) {
         message.reply({
