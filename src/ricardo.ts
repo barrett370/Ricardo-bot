@@ -76,7 +76,7 @@ client.on('messageCreate', async message => {
     }
     if (message.content.toLowerCase().includes("indeed")) {
         message.reply({
-            files: ["./resources/indeed.jpeg"]
+            files: ["./resources/img/indeed.jpeg"]
         })
     }
     if (wang.test(message.content) && Math.random() < 0.1) {
@@ -123,7 +123,7 @@ client.on('interactionCreate', async interaction => {
             req.end();
             break;
         case 'motivationmonday':
-            await interaction.reply(pick_random_quote());
+            await interaction.reply(`${pick_random_quote()}`);
             break;
         case 'shame':
             await interaction.reply({
@@ -135,7 +135,7 @@ client.on('interactionCreate', async interaction => {
 
 });
 
-function pick_random_quote() {
+function pick_random_quote() : String {
     return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
