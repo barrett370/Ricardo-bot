@@ -4,7 +4,7 @@ import { Client, Intents } from "discord.js"
 import { REST } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v9"
 import { SlashCommandBuilder } from "@discordjs/builders";
-import "RegExp" 
+import "RegExp"
 
 const dad_joke_options = {
     hostname: 'icanhazdadjoke.com',
@@ -68,12 +68,12 @@ client.on('messageCreate', async message => {
             iam = iam.replace(new RegExp("\\b" + determinants[i] + "\\b"), '')
         }
         let reply = "Hi" + iam + ", I'm Dad!";
-        let ok = await message.reply(reply) 
+        let ok = await message.reply(reply)
         if (!ok) {
             console.error("failed to reply")
         }
         return
-            
+
     }
     if (message.content.toLowerCase().includes("indeed")) {
         message.reply({
