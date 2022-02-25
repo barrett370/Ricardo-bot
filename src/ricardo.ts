@@ -4,6 +4,7 @@ import { Client, Intents } from "discord.js"
 import { REST } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v9"
 import { SlashCommandBuilder } from "@discordjs/builders";
+import "RegExp" 
 
 const dad_joke_options = {
     hostname: 'icanhazdadjoke.com',
@@ -29,6 +30,7 @@ const commands = [
 
 
 const rest = new REST({ version: '9' }).setToken(token);
+const wang = new RegExp("\d")
 
 (async () => {
 
@@ -77,6 +79,9 @@ client.on('messageCreate', async message => {
         message.reply({
             files: ["./resources/indeed.jpeg"]
         })
+    }
+    if (wang.test(message.content) && Math.random() < 0.1) {
+        message.reply("That's numberwang!")
     }
 });
 

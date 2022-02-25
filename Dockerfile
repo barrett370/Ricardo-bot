@@ -14,12 +14,12 @@ ENV TOKEN ""
 ENV CLIENT_ID ""
 
 RUN mkdir /app
-COPY --from=bob /app/bin /app
-COPY ./src/resources/img /app/resources
-COPY ./src/resources/quotes.json /app/resources/quotes.json
-COPY package.json /app
-COPY package-lock.json /app
+RUN mkdir /app/resources
 WORKDIR /app
+COPY --from=bob /app/bin .
+COPY ./src/resources ./resources
+COPY package.json .
+COPY package-lock.json .
 RUN npm ci 
 
 ENTRYPOINT [ "node", "ricardo.js" ]
