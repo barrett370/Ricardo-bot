@@ -4,7 +4,6 @@ import { Client, Intents } from "discord.js"
 import { REST } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v9"
 import { SlashCommandBuilder } from "@discordjs/builders";
-import "RegExp"
 
 const dad_joke_options = {
     hostname: 'icanhazdadjoke.com',
@@ -124,7 +123,7 @@ client.on('interactionCreate', async interaction => {
             req.end();
             break;
         case 'motivationmonday':
-            await interaction.reply(pick_random_quote())
+            await interaction.reply(pick_random_quote());
             break;
         case 'shame':
             await interaction.reply({
