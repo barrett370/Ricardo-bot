@@ -29,7 +29,7 @@ const commands = [
 
 
 const rest = new REST({ version: '9' }).setToken(token);
-const wang = new RegExp("\d");
+const wang = /\d+/;
 
 (async () => {
 
@@ -79,7 +79,7 @@ client.on('messageCreate', async message => {
             files: ["./resources/img/indeed.jpeg"]
         })
     }
-    if (wang.test(message.content) && Math.random() < 0.1) {
+    if (wang.test(message.content) && Math.random() < 0.3) {
         message.reply("That's numberwang!")
     }
 });
