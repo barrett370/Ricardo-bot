@@ -79,7 +79,7 @@ client.on('messageCreate', async message => {
             files: ["./resources/img/indeed.jpeg"]
         })
     }
-    if (wang.test(message.content) && Math.random() < 0.3) {
+    if (message.content.split(" ").map(elem => wang.test(elem)).some(elem => elem) && Math.random() < 0.1) {
         message.reply("That's numberwang!")
     }
 });
