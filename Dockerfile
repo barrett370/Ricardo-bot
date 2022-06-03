@@ -1,25 +1,21 @@
-FROM node:alpine as bob
+FROM golang:1.18-alpine as bob
 
-RUN mkdir /app
-COPY . /app
+RUN mkdir -p /app /app/bin
 WORKDIR /app
 
-RUN npm ci
-RUN npm i -g typescript
-RUN tsc 
+COPY go.mod go.sum ./
+RUN go mod download
 
-FROM node:alpine
+COPY . ./
+RUN CGO_ENABLED=0 go build -o ./bin/ricardo
+
+==============================================
+
+FROM gcr.io/distroless/static
 
 ENV TOKEN ""
 ENV CLIENT_ID ""
 
-RUN mkdir /app
-RUN mkdir /app/resources
-WORKDIR /app
-COPY --from=bob /app/bin .
-COPY ./src/resources ./resources
-COPY package.json .
-COPY package-lock.json .
-RUN npm ci 
+COPY -- from=bob /app/bin/ricardo /
 
-ENTRYPOINT [ "node", "ricardo.js" ]
+ENTRYPOINT [ "/ricardo" ]

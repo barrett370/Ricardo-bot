@@ -1,9 +1,9 @@
 set dotenv-load := true
 
 
-run: 
-    tsc -p tsconfig.json
-    node ./bin/ricardo.js
+build:
+    CGO_ENABLED=0 go build -o ./bin/
+
 
 run-docker:
     podman run -e TOKEN=${TOKEN} -e CLIENT_ID=${CLIENT_ID} ricardo
