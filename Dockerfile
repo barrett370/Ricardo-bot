@@ -13,4 +13,4 @@ COPY src ./
 
 RUN bun install
 
-ENTRYPOINT ["bun", "run", "./src/ricardo.js"]
+ENTRYPOINT ["bun", "run", "./src/ricardo.ts"]
