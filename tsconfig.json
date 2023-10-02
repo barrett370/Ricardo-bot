@@ -1,12 +1,15 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module":"CommonJS",
+        "module": "CommonJS",
         "experimentalDecorators": true,
         "allowJs": true,
         "resolveJsonModule": true,
         "outDir": "./bin",
         "moduleResolution": "node",
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "types": [
+            "bun-types"
+        ]
     }
 }

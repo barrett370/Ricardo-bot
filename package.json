@@ -1,11 +1,15 @@
 {
   "dependencies": {
     "@discordjs/builders": "^0.8.2",
-    "@discordjs/rest": "^0.1.0-canary.0",
-    "discord-api-types": "^0.25.1",
+    "@discordjs/rest": "^2.0.1",
     "discord.js": "^13.3.1"
   },
   "devDependencies": {
+    "bun-types": "^1.0.3",
+    "discord-api-types": "^0.37.59",
     "typescript": "^4.5.2"
-  }
+  },
+  "name": "ricardo-bot",
+  "module": "index.ts",
+  "type": "module"
 }
