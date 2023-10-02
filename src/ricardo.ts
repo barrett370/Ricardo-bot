@@ -44,13 +44,14 @@ const wang = /\d+/;
 client.on('messageCreate', async message => {
     console.log(message);
     let pref: string;
-    if (((message.content.toLowerCase().includes("i'm")) || (message.content.toLowerCase().includes("i am"))) && message.author.tag !== client.user.tag) {
+    let content = message.content.toLowerCase()
+    if (((content.includes("i'm")) || (content.includes("i’m")) || (content.includes("i am"))) && message.author.tag !== client.user.tag) {
 
         let msg = message.content.toLowerCase();
-        if ((msg.includes("i'm"))) {
-            pref = "i'm";
-        } else {
+        if ((msg.includes("i am"))) {
             pref = "i am";
+        } else {
+            pref = "i'm";
         }
 
         let iam: any = msg.split(pref);
@@ -135,7 +136,7 @@ client.on('interactionCreate', async interaction => {
 
 });
 
-function pick_random_quote() : String {
+function pick_random_quote(): String {
     return quotes[Math.floor(Math.random() * quotes.length)];
 }
 
