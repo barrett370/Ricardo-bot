@@ -1,3 +1,5 @@
+FROM oven/bun:latest
+
 RUN mkdir /app
 WORKDIR /app
 
