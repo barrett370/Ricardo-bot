@@ -1,23 +1,18 @@
-import * as https from "https"
 import * as quotes from "./resources/quotes.json";
-import { Client, Intents } from "discord.js"
+import { Client } from "discord.js"
 import { REST } from "@discordjs/rest"
 import { Routes } from "discord-api-types/v9"
 import { SlashCommandBuilder } from "@discordjs/builders";
 
-const dad_joke_options = {
-    hostname: 'icanhazdadjoke.com',
-    port: "443",
-    path: '/',
-    headers: {
-        'Accept': 'application/json'
-    }
-
+type joke = {
+    id: string,
+    joke: string,
+    status: number
 };
 
-const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
-const token = process.env.TOKEN
-const clientID = process.env.CLIENT_ID
+const client = new Client({ intents: ["Guilds", "GuildMessages"] });
+const token = process.env.TOKEN ?? ""
+const clientID = process.env.CLIENT_ID ?? ""
 
 const commands = [
     new SlashCommandBuilder().setName("ping").setDescription("replies with pong"),
@@ -30,6 +25,7 @@ const commands = [
 
 const rest = new REST({ version: '9' }).setToken(token);
 const wang = /\d+/;
+const discord_hash = /#\d{4}/;
 
 (async () => {
 
@@ -45,7 +41,7 @@ client.on('messageCreate', async message => {
     console.log(message);
     let pref: string;
     let content = message.content.toLowerCase()
-    if (((content.includes("i'm")) || (content.includes("i’m")) || (content.includes("i am"))) && message.author.tag !== client.user.tag) {
+    if (((content.includes("i'm")) || (content.includes("i’m")) || (content.includes("i am"))) && message.author.tag !== client.user?.tag) {
 
         let msg = message.content.toLowerCase();
         if ((msg.includes("i am"))) {
@@ -80,7 +76,7 @@ client.on('messageCreate', async message => {
             files: ["./resources/img/indeed.jpeg"]
         })
     }
-    if (message.content.split(" ").map(elem => wang.test(elem)).some(elem => elem) && Math.random() < 0.1) {
+    if (message.content.split(" ").map(elem => wang.test(elem) && !discord_hash.test(elem)).some(elem => elem) && Math.random() < 0.1) {
         message.reply("That's numberwang!")
     }
 });
@@ -110,18 +106,14 @@ client.on('interactionCreate', async interaction => {
             await interaction.reply({ files: ["./resources/bigbrain.gif"] })
             break
         case 'dad':
-            let req = https.get(dad_joke_options, async res => {
-                res.on('data', async d => {
-                    let jsonContent = JSON.parse(d);
-                    await interaction.reply(jsonContent.joke)
-                });
+            const resp = await fetch("https://icanhazdadjoke.com", {
+                headers: { "Accept": "application/json" }
             });
 
-            req.on('error', async (error) => {
-                console.error(error)
-                await interaction.reply("All outta jokes")
-            });
-            req.end();
+            const body = await resp.json() as joke;
+
+            await interaction.reply(body.joke)
+
             break;
         case 'motivationmonday':
             await interaction.reply(`${pick_random_quote()}`);
