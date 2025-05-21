@@ -45,14 +45,15 @@ client.on('messageCreate', async message => {
 
         console.log("I'm going to getem")
 
-        let msg = message.content.toLowerCase();
-        if ((msg.includes("i am"))) {
+        if ((content.includes("i am"))) {
             pref = "i am";
-        } else {
+        } else if ((content.includes("i’m"))) {
+            pref = "i’m";
+        } else 
             pref = "i'm";
         }
 
-        let iam: any = msg.split(pref);
+        let iam: any = content.split(pref);
 
         iam = iam[1];
 
