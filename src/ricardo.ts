@@ -38,10 +38,12 @@ const discord_hash = /#\d{4}/;
 })()
 
 client.on('messageCreate', async message => {
-    console.log(message);
     let pref: string;
     let content = message.content.toLowerCase()
+    console.log(content)
     if (((content.includes("i'm")) || (content.includes("i’m")) || (content.includes("i am"))) && message.author.tag !== client.user?.tag) {
+
+        console.log("I'm going to getem")
 
         let msg = message.content.toLowerCase();
         if ((msg.includes("i am"))) {
@@ -63,7 +65,7 @@ client.on('messageCreate', async message => {
         for (let i = 0; i < determinants.length; i++) {
             iam = iam.replace(new RegExp("\\b" + determinants[i] + "\\b"), '')
         }
-        let reply = "Hi" + iam + ", I'm Dad!";
+        let reply = "Hi" + iam + ", I'm Chris!";
         let ok = await message.reply(reply)
         if (!ok) {
             console.error("failed to reply")
