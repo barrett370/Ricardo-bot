@@ -49,7 +49,7 @@ client.on('messageCreate', async message => {
             pref = "i am";
         } else if ((content.includes("i’m"))) {
             pref = "i’m";
-        } else 
+        } else {
             pref = "i'm";
         }
 
