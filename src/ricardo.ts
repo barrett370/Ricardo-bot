@@ -10,7 +10,7 @@ type joke = {
     status: number
 };
 
-const client = new Client({ intents: ["Guilds", "GuildMessages"] });
+const client = new Client({ intents: ["Guilds", "GuildMessages", "MessageContent"] });
 const token = process.env.TOKEN ?? ""
 const clientID = process.env.CLIENT_ID ?? ""
 
@@ -93,8 +93,6 @@ client.once('ready', () => {
 })
 
 client.on('interactionCreate', async interaction => {
-    console.log(interaction);
-
     if (!interaction.isCommand()) return;
 
     const { commandName } = interaction
