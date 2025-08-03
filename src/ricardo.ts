@@ -79,7 +79,7 @@ client.on('messageCreate', async message => {
             files: ["./resources/img/indeed.jpeg"]
         })
     }
-    if (message.content.split(" ").map(elem => wang.test(elem) && !discord_hash.test(elem)).some(elem => elem) && Math.random() < 0.1) {
+    if (message.content.split(" ").map(elem => wang.test(elem) && !discord_hash.test(elem)).some(elem => elem) && Math.random() < 0.01) {
         message.reply("That's numberwang!")
     }
 });
