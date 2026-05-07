@@ -76,7 +76,7 @@ client.on('messageCreate', async message => {
     }
     if (message.content.toLowerCase().includes("indeed")) {
         message.reply({
-            files: ["./resources/img/indeed.jpeg"]
+            files: ["./src/resources/img/indeed.jpeg"]
         })
     }
     if (message.content.split(" ").map(elem => wang.test(elem) && !discord_hash.test(elem)).some(elem => elem) && Math.random() < 0.01) {
